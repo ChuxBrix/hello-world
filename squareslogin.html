@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Magic Squares</title>
+        <!-- Resizeable Bootstrap Style -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+        <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script> -->
+        <!-- Latest compiled and minified JavaScript for Bootstrap Style (I have this commented out due to conflicts with chrome dev tools -->
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+    </head>
+
+  <body>
+
+    <h3 class="text-center">Magic Squares</h3>
+    <div class="container">
+      <form>
+        <div class="form-group">
+          <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+          <button type="button" class="btn btn-primary center-block" onclick="auth()">Submit</button>
+      </form>
+            <div id="token-display">
+            </div>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+    auth= function(){
+      var xhttp = new XMLHttpRequest();
+      data={email:document.getElementById("email").value,password:document.getElementById("password").value}
+      xhttp.onreadystatechange = function() {
+        if (xhttp.readyState==4) {
+        var response = xhttp.responseText;
+        document.getElementById("token-display").innerHTML = response;
+    }
+    };
+      xhttp.open("POST", "https://squares-api.herokuapp.com/auth", true);
+      xhttp.setRequestHeader("Content-type", 'application/json; charset=UTF-8');
+      xhttp.send(JSON.stringify(data));
+    }
+  /* getlist= function(){
+     var xhttp = new XMLHttpRequest();
+     xhttp.onreadystatechange = function() {
+       if (xhttp.readyState==4) {
+       var response = JSON.parse(xhttp.responseText);
+       var ul=document.createElement("ul");
+     for(var i=0;i<response.users.length;i++){
+     var li=document.createElement("li");
+     li.appendChild(document.createTextNode(response.users[i].name));
+     ul.appendChild(li);
+    }
+     document.getElementById("list").appendChild(ul);
+    }
+    };
+      xhttp.open("POST", "http://localhost:3000/getusers", true);
+      xhttp.setRequestHeader("Content-type", 'application/json; charset=UTF-8');
+      xhttp.send();          
+    } */
+        </script>
+    </body>
+</html>
